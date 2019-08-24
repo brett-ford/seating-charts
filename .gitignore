@@ -1,0 +1,13 @@
+__pycache__/
+.idea/
+credentials.json
+period_3.csv
+period_5.csv
+period_6.csv
+prohibitions.csv
+schedule.py
+seating_chart_1.py
+seating_chart_2.py
+seating_chart_3.py
+token.pickle
+update_history
