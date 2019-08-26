@@ -1,10 +1,13 @@
 from googleapiclient.discovery import build
 
-"""class to retrieve and handle student data."""
+from schedule import Schedule
+
+"""This class stores the data needed to update the seating charts."""
 
 
-class Names:
-    """Creates a 'names' object."""
+class StudentData(Schedule):
+    """Retrieves and stores the data needed to create new seating charts."""
+
     def __init__(self, schedule, periods, credentials):
         self.schedule = schedule
         self.periods = periods
@@ -12,7 +15,7 @@ class Names:
         self.names = self.get_names()
 
     def get_names(self):
-        """Gets student names for all requested sections."""
+        """Gets student names for all requested periods."""
         print('Reading...')
         names = {}
         for period in self.periods:
@@ -20,7 +23,7 @@ class Names:
         return names  # keys = periods, values = list of names
 
     def get_list(self, period):
-        """Reads one class list."""
+        """Reads one period's class list."""
         class_list = []  # Array to hold the names
         ss_id = self.schedule[period]['Sheet_ID']  # Spreadsheet ID
         ss_range = 'Summary!B3:H30'  # Spreadsheet range

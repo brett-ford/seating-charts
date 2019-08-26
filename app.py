@@ -2,7 +2,7 @@
 
 from authenticate import get_credentials
 from schedule import Schedule
-from student_data import Names
+from data import StudentData
 from seating import Seating
 from storage import Storage
 
@@ -16,13 +16,13 @@ def main():
     schedule = Schedule().mb_2019_2020  # Retrieve current schedule.
     periods = process_input(user_input, schedule)  # Input the class period.
     credentials = get_credentials()  # Authenticate
-    class_lists = Names(schedule, periods, credentials)  # Get students' names.
+    class_lists = StudentData(schedule, periods, credentials)  # Get students' names.
     seating_chart = Seating(schedule, periods, credentials, class_lists)  # Retrieves current seating charts.
     seating_chart.update()  # New seating chart for selected periods.
     seating_chart.write_names()  # Record in Google Sheet.
 
-    print(Storage(schedule, periods, seating_chart).log_update())
-    # storage.record(new_tables.keys())  # Store new seating chart.
+    Storage(schedule, periods, seating_chart).store()  # Update seating chart in storage.
+
     print('***** Finished *****')
 
 
@@ -30,7 +30,7 @@ def process_input(user_input, schedule):
     active_periods = list(schedule.keys())
     if user_input == 'all':
         periods = active_periods.copy()
-        print(periods)
+        print('New Seats: {}'.format(periods))
         return periods
     choices = list(user_input)
     periods = []
@@ -43,7 +43,7 @@ def process_input(user_input, schedule):
             if p in active_periods:
                 periods.append(p)
     if periods:
-        print(periods)
+        print('New Seats: {}'.format(periods))
         return periods
     else:
         print('Invalid input.')
