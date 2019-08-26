@@ -49,3 +49,4 @@ class Storage:
             for j in range(6):
                 if array[i][j] == '':
                     del array[i][j]
+        return array
