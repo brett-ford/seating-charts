@@ -1,0 +1,234 @@
+{
+    "Updates": [
+        {
+            "Created": "2019-08-26 20:47:02",
+            "Periods Updated": [
+                2,
+                3,
+                5,
+                6
+            ],
+            "App Test": true,
+            "Seating Chart": {
+                "2": {
+                    "Course": "Linear Algebra",
+                    "Tables": {
+                        "Table_1": [
+                            "Rhys H.",
+                            "Bryce H.",
+                            "Cesar H."
+                        ],
+                        "Table_2": [
+                            "Jean S.",
+                            "Maikel F.",
+                            "Jacob R."
+                        ],
+                        "Table_3": [
+                            "Aaron N.",
+                            "Jake A.",
+                            "Scott K."
+                        ]
+                    }
+                },
+                "3": {
+                    "Course": "AP Calculus BC",
+                    "Tables": {
+                        "Table_1": [
+                            "Tommy S.",
+                            "Nora V.",
+                            "Ishod W."
+
+                        ],
+                        "Table_2": [
+                            "Zion W.",
+                            "Don N.",
+                            "Jeff R."
+                        ],
+                        "Table_3": [
+                            "Tony H.",
+                            "Nyjah H.",
+                            "Jake P."
+                        ],
+                        "Table_4": [
+                            "Ryan S.",
+                            "Ryan D.",
+                            "Jamie F."
+                        ]
+                    }
+                },
+                "5": {
+                    "Course": "Honors Precalculus",
+                    "Tables": {
+                        "Table_1": [
+                            "Bernie S.",
+                            "Beto O.",
+                            "Barack O."
+                        ],
+                        "Table_2": [
+                            "Donald T.",
+                            "Gary J.",
+                            "Hilary C."
+                        ],
+                        "Table_3": [
+                            "Ted C.",
+                            "Elizabeth W.",
+                            "Joe B."
+                        ],
+                        "Table_4": [
+                            "Ted K.",
+                            "Richard N.",
+                            "Bill C.",
+                            "George B."
+                        ]
+                    }
+                },
+                "6": {
+                    "Course": "Honors Precalculus",
+                    "Tables": {
+                        "Table_1": [
+                            "Andrew S.",
+                            "Sebastian M.",
+                            "Joe R.",
+                            "Tina F."
+                        ],
+                        "Table_2": [
+                            "Pete D.",
+                            "Dave C.",
+                            "Chris R."
+                        ],
+                        "Table_3": [
+                            "Martin L.",
+                            "Rosanne B.",
+                            "Carrot T.",
+                            "Jimmy F."
+                        ],
+                        "Table_4": [
+                            "Stephen C.",
+                            "Steve C.",
+                            "Keenan T."
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "Created": "2019-08-26 20:53:36",
+            "Periods": [
+                2,
+                3,
+                5,
+                6
+            ],
+            "App Test": true,
+            "Seating Chart": {
+                "2": {
+                    "Course": "Linear Algebra",
+                    "Tables": {
+                        "Table_1": [
+                            "Rhys H.",
+                            "Jean S.",
+                            "Aaron N."
+                        ],
+                        "Table_2": [
+                            "Bryce H.",
+                            "Maikel F.",
+                            "Jake A."
+                        ],
+                        "Table_3": [
+                            "Cesar H.",
+                            "Jacob R.",
+                            "Scott K."
+                        ],
+                        "Table_4": [
+                            "Mike S.",
+                            "Steve C.",
+                            "Darren D."
+                        ]
+                    }
+                },
+                "3": {
+                    "Course": "AP Calculus BC",
+                    "Tables": {
+                        "Table_1": [
+                            "Tommy S.",
+                            "Zion W.",
+                            "Tony H."
+                        ],
+                        "Table_2": [
+                            "Nora V.",
+                            "Don N.",
+                            "Nyjah H."
+                        ],
+                        "Table_3": [
+                            "Ishod W.",
+                            "Jeff R.",
+                            "Jake P."
+                        ],
+                        "Table_4": [
+                            "Danny W.",
+                            "Rodney M.",
+                            "Ryan D."
+                        ]
+                    }
+                },
+                "5": {
+                    "Course": "Honors Precalculus",
+                    "Tables": {
+                        "Table_1": [
+                            "Bernie S.",
+                            "Donald T.",
+                            "Ted C.",
+                            "Ted K."
+                        ],
+                        "Table_2": [
+                            "Beto O.",
+                            "Gary J.",
+                            "Elizabeth W.",
+                            "Richard N."
+                        ],
+                        "Table_3": [
+                            "Barack O.",
+                            "Hilary C.",
+                            "Joe B.",
+                            "Bill C."
+                        ],
+                        "Table_4": [
+                            "Jimmy C.",
+                            "John K.",
+                            "Ronald R.",
+                            "George B."
+                        ]
+                    }
+                },
+                "6": {
+                    "Course": "Honors Precalculus",
+                    "Tables": {
+                        "Table_1": [
+                            "Andrew S.",
+                            "Jimmy F.",
+                            "Rosanne B.",
+                            "Tina F."
+                        ],
+                        "Table_2": [
+                            "Pete D.",
+                            "Dave C.",
+                            "Joe R.",
+                            "Chris R."
+                        ],
+                        "Table_3": [
+                            "Martin L.",
+                            "Keenan T.",
+                            "Stephen C.",
+
+                        ],
+                        "Table_4": [
+                            "Carrot T.",
+                            "Sebastian M.",
+                            "Steve C."
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

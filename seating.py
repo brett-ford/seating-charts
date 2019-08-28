@@ -10,8 +10,6 @@ from schedule import Schedule
 class Seating(Schedule):
     """Seating chart object for storing and updating seating arrangements."""
 
-    app_test = True
-
     def __init__(self, user_input, credentials):
         self.time_stamp = dt.today().strftime('%Y-%m-%d %H:%M:%S')
         self.periods = self.get_periods(user_input)  # Periods for which a change is requested.
