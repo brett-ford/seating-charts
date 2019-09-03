@@ -16,8 +16,16 @@ def main():
     seating_chart.update()  # New seating chart for selected periods.
     seating_chart.write_names()  # Record in Google Sheet.
     Storage(seating_chart).update_storage()  # Update seating chart in storage.
-    print(seating_chart.seating_chart)
+    print_seating(seating_chart.seating_chart)
     print('***** Finished *****')
+
+
+def print_seating(current_seating):
+    print('Verify current seating...')
+    for p in current_seating:
+        print('Period {}:'.format(p))
+        for t in range(len(current_seating[p])):
+            print('Table {}: {}'.format(t+1, current_seating[p][t]))
 
 
 if __name__ == '__main__':

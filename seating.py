@@ -1,5 +1,6 @@
 import random
 import csv
+import copy
 from datetime import datetime as dt
 
 from googleapiclient.discovery import build
@@ -41,7 +42,7 @@ class Seating(Schedule):
                     for row in values:
                         array.append(row)
                     seating[period] = array
-        return seating
+        return seating  # keys = periods, values = 2D arrays
 
     def get_class_lists(self):
         """Gets class list for each requested period."""
@@ -137,7 +138,7 @@ class Seating(Schedule):
 
         for period in self.periods:
             if period in self.class_lists:
-                seating_update = self.extend_array(self.seating_chart[period])
+                seating_update = self.extend_array(copy.deepcopy(self.seating_chart[period]))
                 ss_range = 'Period {}!B2:G5'.format(period)
                 body = {'values': seating_update, 'majorDimension': 'rows'}
                 try:

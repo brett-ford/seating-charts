@@ -1,11 +1,10 @@
 import json
-from datetime import datetime as dt
 
 
 class Storage:
     """Stores seating chart updates in json format."""
 
-    app_test = True
+    app_test = False
 
     def __init__(self, seating_chart):
         self.seating_chart = seating_chart
