@@ -7,14 +7,13 @@ from google.auth.transport.requests import Request
 
 class Authenticate:
     """Authenticate to the Google Sheets and Google Drive APIs.
-    This code is adapted from Google's quick setup guide."""
+    This code is adapted from Google's quick start guide."""
 
     @staticmethod
     def get_credentials():
-        """Returns credentials for Google Sheets and Google Drive APIs."""
+        """Returns credentials for the API."""
 
-        scopes = ['https://www.googleapis.com/auth/spreadsheets',
-                  'https://www.googleapis.com/auth/drive.file']
+        scopes = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive.file']
 
         credentials = None
         if os.path.exists('token.pickle'):

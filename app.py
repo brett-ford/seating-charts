@@ -4,14 +4,12 @@ from authenticate import Authenticate
 from seating import Seating
 from storage import Storage
 
-"""Assigns students to new table groups."""
-
 
 def main():
-    """Main"""
+    """Updates seating for each selected period."""
     print('***** New Table Groups! *****')
     user_input = input("Enter period(s) or 'all':")
-    credentials = Authenticate.get_credentials()  # Authenticate to Google Sheets API.
+    credentials = Authenticate.get_credentials()  # Get Google Sheets API credentials.
     seating_chart = Seating(user_input, credentials)  # Retrieves current seating charts.
     seating_chart.update()  # New seating chart for selected periods.
     seating_chart.write_names()  # Record in Google Sheet.

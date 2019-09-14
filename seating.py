@@ -22,7 +22,7 @@ class Seating(Schedule):
         """Gets current seating chart."""
 
         seating = {}  # keys = periods, values = 2D arrays
-        ss_id = self.target_id
+        ss_id = self.seating_id
         service = build('sheets', 'v4', credentials=self.credentials)  # Call the Sheets API
         sheet = service.spreadsheets()
 
@@ -55,7 +55,7 @@ class Seating(Schedule):
 
         for period in self.periods:
             class_list = []  # Array to hold the names
-            ss_id = self.source_ids[period]  # Source spreadsheet ID
+            ss_id = self.mb_2019_2020[period]['source_id']  # Source spreadsheet ID
 
             try:
                 result = sheet.values().get(spreadsheetId=ss_id, range=ss_range).execute()
@@ -133,7 +133,7 @@ class Seating(Schedule):
         """writes updated seating charts to Google Sheet."""
 
         print('Writing to spreadsheet...')
-        ss_id = self.target_id
+        ss_id = self.seating_id
         service = build('sheets', 'v4', credentials=self.credentials)  # Call Google Sheets API.
 
         for period in self.periods:
