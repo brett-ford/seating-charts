@@ -15,7 +15,7 @@ class Seating(Schedule):
         self.time_stamp = dt.today().strftime('%Y-%m-%d %H:%M:%S')
         self.periods = self.get_periods(user_input)  # Periods for which a change is requested.
         self.credentials = credentials
-        self.seating_chart = self.get_seating_chart()  # format???
+        self.seating_chart = self.get_seating_chart()
         self.class_lists = self.get_class_lists()
 
     def get_seating_chart(self):
