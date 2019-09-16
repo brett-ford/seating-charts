@@ -49,7 +49,7 @@ class Seating(Schedule):
 
         print('Getting class lists...')
         students = {}  # key = periods, values = list of names
-        ss_range = 'Summary!B3:H30'  # Spreadsheet range for source sheet.
+        ss_range = 'Summary!B3:H40'  # Spreadsheet range for source sheet.
         service = build('sheets', 'v4', credentials=self.credentials)  # Call the Sheets API
         sheet = service.spreadsheets()
 
