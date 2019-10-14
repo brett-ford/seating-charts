@@ -1,6 +1,7 @@
 import random
 import csv
 import copy
+import json
 from datetime import datetime as dt
 
 from googleapiclient.discovery import build
@@ -11,6 +12,7 @@ from schedule import Schedule
 
 class Seating(Schedule):
     """Seating chart object for storing and updating seating arrangements."""
+    app_test = False
 
     def __init__(self, user_input):
         self.time_stamp = dt.today().strftime('%Y-%m-%d %H:%M:%S')
@@ -168,6 +170,39 @@ class Seating(Schedule):
             print('Invalid input.')
             print('***** Finished *****')
             exit()
+
+    def update_storage(self):
+        """Writes seating update to storage.json."""
+        print('Updating storage...')
+        update = self.create_update()
+        try:
+            with open('storage.json', 'r+') as storage:
+                storage_data = json.load(storage)
+                storage_data["Updates"].append(update)
+                storage.seek(0)
+                json.dump(storage_data, storage, ensure_ascii=False, indent=4)
+        except Exception as e:
+            print('Update failed: {}'.format(e))
+        else:
+            print(update)
+
+    def create_update(self):
+        """Formats data for the storage update."""
+        seating_dict = {}
+        for p in self.seating_chart.keys():
+            tables = {}
+            for t in range(len(self.seating_chart[p])):
+                tables['Table_{}'.format(t+1)] = self.seating_chart[p][t]
+
+            seating_dict[p] = {'Course': self.schedules['2019_2020'][p]['title'],
+                               'Tables': tables}
+
+        update = {'Created': self.time_stamp,
+                  'Periods': self.periods,
+                  'App Test': self.app_test,
+                  'Seating Chart': seating_dict
+                  }
+        return update
 
     def verify_seating(self):
         """Prints final state of self.seating_chart."""

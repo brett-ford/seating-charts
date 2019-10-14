@@ -12,10 +12,9 @@ def main():
     seating_chart = Seating(user_input)  # Retrieves current seating.
     seating_chart.update()  # New seating for selected periods.
     seating_chart.write_names()  # Record in Google Sheet.
+    seating_chart.update_storage()  # Append new seating to storage.
+    seating_chart.verify_seating()  # Print out current state of seating object.
 
-    Storage(seating_chart).update_storage()  # Append new seating to storage.
-
-    seating_chart.verify_seating()
     print('***** Finished *****')
 
 
