@@ -5,28 +5,28 @@ from datetime import datetime as dt
 
 from googleapiclient.discovery import build
 
+from authenticate import Authenticate
 from schedule import Schedule
 
 
 class Seating(Schedule):
     """Seating chart object for storing and updating seating arrangements."""
 
-    def __init__(self, user_input, credentials):
+    def __init__(self, user_input):
         self.time_stamp = dt.today().strftime('%Y-%m-%d %H:%M:%S')
         self.periods = self.get_periods(user_input)  # Periods for which a change is requested.
-        self.credentials = credentials
+        self.credentials = Authenticate.get_credentials()
         self.seating_chart = self.get_seating_chart()
         self.class_lists = self.get_class_lists()
 
     def get_seating_chart(self):
         """Gets current seating chart."""
-
         seating = {}  # keys = periods, values = 2D arrays
         ss_id = self.seating_id
         service = build('sheets', 'v4', credentials=self.credentials)  # Call the Sheets API
         sheet = service.spreadsheets()
 
-        for period in self.mb_2019_2020.keys():
+        for period in self.schedules['2019_2020'].keys():
             array = []  # Array to hold the names
             ss_range = 'Period {}!B2:G4'.format(period)  # Spreadsheet range
             try:
@@ -55,7 +55,7 @@ class Seating(Schedule):
 
         for period in self.periods:
             class_list = []  # Array to hold the names
-            ss_id = self.mb_2019_2020[period]['source_id']  # Source spreadsheet ID
+            ss_id = self.schedules['2019_2020'][period]['gradebook_id']  # Source spreadsheet ID
 
             try:
                 result = sheet.values().get(spreadsheetId=ss_id, range=ss_range).execute()
@@ -153,7 +153,7 @@ class Seating(Schedule):
                     print(result)  # Verify success
 
     def get_periods(self, user_input):
-        active_periods = list(self.mb_2019_2020.keys())
+        active_periods = list(self.schedules['2019_2020'].keys())
         if user_input == 'all':
             periods = active_periods.copy()
             print('New Seats: {}'.format(periods))
@@ -175,6 +175,14 @@ class Seating(Schedule):
             print('Invalid input.')
             print('***** Finished *****')
             exit()
+
+    def verify_seating(self):
+        print('Verify current seating...')
+        chart = self.seating_chart
+        for p in chart:
+            print('Period {}:'.format(p))
+            for t in range(len(chart[p])):
+                print('Table {}: {}'.format(t + 1, chart[p][t]))
 
     @staticmethod
     def get_prohibitions():
