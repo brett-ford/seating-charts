@@ -3,7 +3,6 @@ import json
 
 class Storage:
     """Stores seating chart updates in json format."""
-
     test = False
 
     def __init__(self, seating_chart):
@@ -32,7 +31,7 @@ class Storage:
             for t in range(len(self.seating_chart.seating_chart[p])):
                 tables['Table_{}'.format(t+1)] = self.seating_chart.seating_chart[p][t]
 
-            seating_dict[p] = {'Course': self.seating_chart.mb_2019_2020[p]['title'],
+            seating_dict[p] = {'Course': self.seating_chart.schedules['2019_2020'][p]['title'],
                                'Tables': tables}
 
         update = {'Created': self.seating_chart.time_stamp,

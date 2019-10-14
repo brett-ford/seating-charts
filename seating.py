@@ -16,13 +16,12 @@ class Seating(Schedule):
         self.time_stamp = dt.today().strftime('%Y-%m-%d %H:%M:%S')
         self.periods = self.get_periods(user_input)  # Periods for which a change is requested.
         self.credentials = Authenticate.get_credentials()
-        self.seating_chart = self.get_seating_chart()
-        self.class_lists = self.get_class_lists()
+        self.seating_chart = self.get_seating_chart()  # Current seating arrangements.
+        self.class_lists = self.get_class_lists()  # Current class lists.
 
     def get_seating_chart(self):
         """Gets current seating chart."""
         seating = {}  # keys = periods, values = 2D arrays
-        ss_id = self.seating_id
         service = build('sheets', 'v4', credentials=self.credentials)  # Call the Sheets API
         sheet = service.spreadsheets()
 
@@ -30,7 +29,7 @@ class Seating(Schedule):
             array = []  # Array to hold the names
             ss_range = 'Period {}!B2:G4'.format(period)  # Spreadsheet range
             try:
-                result = sheet.values().get(spreadsheetId=ss_id, range=ss_range).execute()
+                result = sheet.values().get(spreadsheetId=self.seating_id, range=ss_range).execute()
                 values = result.get('values', [])
             except Exception as e:
                 print('Period {}: Failed to read.'.format(period))
@@ -46,7 +45,6 @@ class Seating(Schedule):
 
     def get_class_lists(self):
         """Gets class list for each requested period."""
-
         print('Getting class lists...')
         students = {}  # key = periods, values = list of names
         ss_range = 'Summary!B3:H40'  # Spreadsheet range for source sheet.
@@ -76,7 +74,6 @@ class Seating(Schedule):
 
     def update(self):
         """Updates seating for the requested periods."""
-
         print('Updating seating chart...')
         for period in self.periods:
             if period in self.class_lists:
@@ -94,7 +91,6 @@ class Seating(Schedule):
 
     def new_tables(self, period):
         """Creates new table groups."""
-
         class_list = self.class_lists[period]
         prohibitions = self.get_prohibitions()
         t = self.number_of_tables(len(class_list))
@@ -102,9 +98,7 @@ class Seating(Schedule):
 
         while True:
             students = class_list.copy()
-
-            # Array to hold table groups.
-            tables = []
+            tables = []  # Array to hold table groups.
             for i in range(t):
                 tables.append([])
 
@@ -130,10 +124,8 @@ class Seating(Schedule):
                 return tables, count  # 2D array, number of builds.
 
     def write_names(self):
-        """writes updated seating charts to Google Sheet."""
-
+        """Writes updated seating to Google Sheet."""
         print('Writing to spreadsheet...')
-        ss_id = self.seating_id
         service = build('sheets', 'v4', credentials=self.credentials)  # Call Google Sheets API.
 
         for period in self.periods:
@@ -142,7 +134,7 @@ class Seating(Schedule):
                 ss_range = 'Period {}!B2:G5'.format(period)
                 body = {'values': seating_update, 'majorDimension': 'rows'}
                 try:
-                    result = service.spreadsheets().values().update(spreadsheetId=ss_id,
+                    result = service.spreadsheets().values().update(spreadsheetId=self.seating_id,
                                                                     valueInputOption='RAW',
                                                                     range=ss_range,
                                                                     body=body).execute()
@@ -153,6 +145,7 @@ class Seating(Schedule):
                     print(result)  # Verify success
 
     def get_periods(self, user_input):
+        """Processes user input to determine which periods need new seating arrangements."""
         active_periods = list(self.schedules['2019_2020'].keys())
         if user_input == 'all':
             periods = active_periods.copy()
@@ -177,6 +170,7 @@ class Seating(Schedule):
             exit()
 
     def verify_seating(self):
+        """Prints final state of self.seating_chart."""
         print('Verify current seating...')
         chart = self.seating_chart
         for p in chart:
@@ -186,7 +180,7 @@ class Seating(Schedule):
 
     @staticmethod
     def get_prohibitions():
-        """Reads .csv to get seating restrictions."""
+        """Reads csv to get seating restrictions."""
         prohibitions = []
         with open('prohibitions.csv', 'r', newline='', encoding='utf-8-sig') as storage:
             reader = csv.reader(storage)

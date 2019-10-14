@@ -12,7 +12,6 @@ class Authenticate:
     @staticmethod
     def get_credentials():
         """Returns credentials for the API."""
-
         scopes = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive.file']
 
         credentials = None
