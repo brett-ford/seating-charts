@@ -1,12 +1,12 @@
-#!/usr/bin/env python3
+#!/usr/local/bin/python3.7
+"""Previous interpretor: /usr/bin/env python3"""
 
 from seating import Seating
-from storage import Storage
 
 
 def main():
     """Updates seating for each selected period."""
-    print('***** New Table Groups! *****')
+    print('******* New Table Groups! *******')
     user_input = input("Enter period(s) or 'all':")
 
     seating_chart = Seating(user_input)  # Retrieves current seating.
@@ -15,7 +15,7 @@ def main():
     seating_chart.update_storage()  # Append new seating to storage.
     seating_chart.verify_seating()  # Print out current state of seating object.
 
-    print('***** Finished *****')
+    print('******* Finished *******')
 
 
 if __name__ == '__main__':
