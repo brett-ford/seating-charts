@@ -3,15 +3,16 @@ import csv
 import copy
 import json
 from datetime import datetime as dt
-
 from googleapiclient.discovery import build
-
 from authenticate import Authenticate
 from schedule import Schedule
 
 
 class Seating(Schedule):
-    """Seating chart object for storing and updating seating arrangements."""
+    """
+    Seating chart object for storing and updating seating arrangements.
+    """
+    
     app_test = False
     year = "2019_2020"
 
@@ -27,6 +28,7 @@ class Seating(Schedule):
         self.class_lists = self.get_class_lists()  # Current class lists.
 
         self.seating_chart = self.get_seating_chart()  # Current seating arrangements.
+        print(self.seating_chart)
 
     @staticmethod
     def get_history():
@@ -48,7 +50,7 @@ class Seating(Schedule):
 
         for period in self.schedules[self.year].keys():
             array = []  # Array to hold the names
-            ss_range = 'Period {}!B2:G4'.format(period)  # Spreadsheet range
+            ss_range = 'Period {}!B2:G5'.format(period)  # Spreadsheet range
             try:
                 result = sheet.values().get(spreadsheetId=self.seating_id, range=ss_range).execute()
                 values = result.get('values', [])
